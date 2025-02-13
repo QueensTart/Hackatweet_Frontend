@@ -55,7 +55,7 @@ function Login() {
       headers : {'Content-Type': 'application/json'},
       body : JSON.stringify({username : signInUsername, password : signInPassword})
     }).then(data => {
-      console.log(data)
+      console.log(data.result)
       if(data.result)
       {
         dispatch(login({username : signInUsername, token : data.token}));
@@ -92,7 +92,7 @@ function Login() {
     </div>
   );
 
-  console.log(firstName, signUpUsername, signUpPassword);
+  console.log(signInUsername, signInPassword);
   
   
   return (
