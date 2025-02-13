@@ -1,4 +1,7 @@
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import { login, logout } from "../reducers/user"
 
 import { Modal } from 'antd';
 import Link from 'next/link';
@@ -7,6 +10,9 @@ import styles from '../styles/Login.module.css';
 import Header from "./Header";
 
 function Login() {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.value);
+  
   const [signUpModal, setSignUpModal] = useState(false);
   const [signInModal, setSignInModal] = useState(false);
   const [firstName, setFirstName] = useState("");
@@ -25,6 +31,41 @@ function Login() {
   const header = (<Header/>);
   let logo = (<img className={styles.logo} src="hackatweet_logo.png" alt = "logo"/>);
 
+  const signUpButtonClicked = () => {
+    fetch("http://localhost:3000/users/signup", {
+      method : "POST",
+      headers : { 'Content-Type': 'application/json'},
+      body : JSON.stringify({username : signUpUsername, firstname : firstName,  password : signUpPassword}),
+    }).then(response => response.json())
+      .then(data => {
+        if(data.result)
+        {
+          dispatch(login({username : signUpUsername, token : data.token}));
+          setFirstName("");
+          setSignUpUsername("");
+          setSignUpPassword("");
+          showSignUpModal();
+        }
+      });
+  };
+
+  const signInButtonClicked = () =>{
+    fetch("http://localhost:3000/users/signin", {
+      method : "POST",
+      headers : {'Content-Type': 'application/json'},
+      body : JSON.stringify({username : signInUsername, password : signInPassword})
+    }).then(data => {
+      console.log(data)
+      if(data.result)
+      {
+        dispatch(login({username : signInUsername, token : data.token}));
+        setSignInUsername("");
+        setSignInPassword("");
+        showSignInModal();
+      }
+    })
+  }
+
   let signUpModalContent = (
     <div>
       <button className={styles.closeButton} onClick={() => showSignUpModal()}>X</button>
@@ -34,7 +75,7 @@ function Login() {
         <input type="text" placeholder="Firstname" id="signUpFirstname" onChange={(e) => setFirstName(e.target.value)} value={firstName}/>
 				<input type="text" placeholder="Username" id="signUpUsername" onChange={(e) => setSignUpUsername(e.target.value)} value={signUpUsername}/>
 				<input type="password" placeholder="Password" id="signUpPassword" onChange={(e) => setSignUpPassword(e.target.value)} value={signUpPassword}/>
-				<button id="register">Sign Up</button>
+				<button id="register" onClick={() => signUpButtonClicked()}>Sign Up</button>
 		  </div>
 		</div>
   );
@@ -46,10 +87,12 @@ function Login() {
           <p className={styles.text}>Connect to Hackatweet</p>
           <input type="text" placeholder="Username" id="signInUsername" onChange={(e) => setSignInUsername(e.target.value)} value={signInUsername} />
           <input type="password" placeholder="Password" id="signInPassword" onChange={(e) => setSignInPassword(e.target.value)} value={signInPassword} />
-          <button id="connection">Sign In</button>
+          <button id="connection" onClick={() => signInButtonClicked()}>Sign In</button>
       </div>
     </div>
   );
+
+  console.log(firstName, signUpUsername, signUpPassword);
   
   
   return (
