@@ -1,0 +1,115 @@
+.main {
+    width: 100vw;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #141c27;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.homeContainer
+{
+    border-right: 1px solid #2f3740;
+    width : 20%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+}
+
+.tweetContainer
+{
+    border-right: 1px solid #2f3740;
+    width : 50%;
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    border-bottom: #2f3740;
+}
+
+.trendContainer
+{
+    border-left: 1px solid #2f3740;
+    width : 20%;
+    padding-top: 10px;
+    padding-left: 30px;
+}
+
+.logo {
+	width: 80px;
+  	height : 80px;
+}
+
+.user
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.userInfos
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.userName
+{
+    color: #49525e;
+}
+
+.profilePicture
+{
+    width: 50px;
+    height : 50px; 
+}
+
+.homeButton
+{
+    width: 80px;
+    height : 80px;
+    background-color: transparent;  
+    border: none;
+}
+
+.logoutButton
+{
+    background-color: #1a222c;
+    width : 120px;
+    height : 40px;
+    padding : 5px;
+    border : 1px solid #2f3740;
+}
+
+/* .hashtagTitle
+{
+    margin-right: 600px;
+} */
+
+.searchbar
+{
+    width : 80%;
+    height : 40px;
+    font-size: large;
+    text-align: left;
+    padding-left: 30px;
+    margin-top: 30px;
+}
+
+.trends
+{
+    border-radius: 30px;
+    width : 100%;
+    background-color: #1a222c;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-left: 20px;
+}

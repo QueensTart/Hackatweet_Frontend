@@ -9,11 +9,30 @@ body {
   box-sizing: border-box;
 }
 
+h2
+{
+  color: white;
+  font-weight: bold;
+}
+
+h3
+{
+  color: white;
+  font-weight: bold;
+}
+
+p
+{
+  color: white;
+  font-weight: bold;
+}
+
 input {
   border: none;
-  border-bottom: 0.5px lightgray solid;
-  margin-bottom: 15px;
+  border-radius: 50px;
+  /* margin-bottom: 15px; */
   text-align: center;
+  background-color: #1a222c;
 }
 
 input:focus {
