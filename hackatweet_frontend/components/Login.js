@@ -9,6 +9,7 @@ import Head from 'next/head';
 import styles from '../styles/Login.module.css';
 import Header from "./Header";
 import Home from "./Home";
+import Hashtag from "./Hashtag";
 
 function Login() {
   const dispatch = useDispatch();
@@ -23,8 +24,12 @@ function Login() {
 	const [signUpPassword, setSignUpPassword] = useState('');
 	const [signInUsername, setSignInUsername] = useState('');
 	const [signInPassword, setSignInPassword] = useState('');
-  const [routeToHome, setRouteToHome] = useState(false);
+  const [userData, setUserData] = useState({});
 
+  const userInfos = userData.map((data, i) =>{
+    return <Hashtag key = {i} {...data} />
+  });
+  
   const showSignUpModal = () => {
 		setSignUpModal(!signUpModal);
 	};
@@ -45,6 +50,7 @@ function Login() {
         if(data.result)
         {
           dispatch(login({username : signUpUsername, token : data.token}));
+          setUserData({firstname : firstName, username : signUpUsername});
           setFirstName("");
           setSignUpUsername("");
           setSignUpPassword("");
