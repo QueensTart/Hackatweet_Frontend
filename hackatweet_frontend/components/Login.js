@@ -24,10 +24,10 @@ function Login() {
 	const [signUpPassword, setSignUpPassword] = useState('');
 	const [signInUsername, setSignInUsername] = useState('');
 	const [signInPassword, setSignInPassword] = useState('');
-  const [userData, setUserData] = useState({});
+  //const [userData, setUserData] = useState([]);
 
   // const userInfos = userData.map((data, i) =>{
-  //   return <Hashtag key = {i} {...data} />
+  //   return <Hashtag key = {i} firstname = {data.firstname} username = {data.username} />
   // });
   
   const showSignUpModal = () => {
@@ -46,17 +46,14 @@ function Login() {
       headers : { 'Content-Type': 'application/json'},
       body : JSON.stringify({username : signUpUsername, firstname : firstName,  password : signUpPassword}),
     }).then(response => response.json())
-      .then(data => {
-        if(data.result)
-        {
-          dispatch(login({username : data.userInfo.username, token : data.token}));
-          setUserData({firstname : data.userInfo.firstname, username : data.userInfo.username});
-          setFirstName("");
-          setSignUpUsername("");
-          setSignUpPassword("");
-          showSignUpModal();
-        }
-      });
+    .then(data => {
+      if(data.result)
+      {
+        dispatch(login({username : data.userInfo.username, firstname : data.userInfo.firstname, token : data.userInfo.token}));
+        //setUserData([{firstname : data.userInfo.firstname, username : data.userInfo.username}]);
+        showSignUpModal();
+      }
+    });
   };
 
   const signInButtonClicked = () =>{
@@ -69,12 +66,11 @@ function Login() {
       console.log(data.result)
       if(data.result)
       {
-        dispatch(login({username : data.userInfo.username, token : data.token}));
-        setSignInUsername("");
-        setSignInPassword("");
+        dispatch(login({username : data.userInfo.username, firstname : data.userInfo.firstname, token : data.token}));
+        //setUserData([{firstname : data.userInfo.firstname, username : data.userInfo.username}]);
         showSignInModal();
       }
-    })
+    });
   }
 
   let signUpModalContent = (
@@ -104,11 +100,8 @@ function Login() {
   );
   if(userToken)
   {
-    router.push("/home");
+    router.push("/hashtag");
   }
-
-  console.log(userToken);
-  
   
   return (
     <div className={styles.main}>
