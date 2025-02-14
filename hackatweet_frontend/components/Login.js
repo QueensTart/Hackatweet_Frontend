@@ -1,17 +1,21 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from 'next/router'
 
 import { login, logout } from "../reducers/user"
 
 import { Modal } from 'antd';
-import Link from 'next/link';
 import Head from 'next/head';
 import styles from '../styles/Login.module.css';
 import Header from "./Header";
+import Home from "./Home";
+import Hashtag from "./Hashtag";
 
 function Login() {
   const dispatch = useDispatch();
+  const router = useRouter();
   const user = useSelector((state) => state.user.value);
+  const userToken = user.token;
   
   const [signUpModal, setSignUpModal] = useState(false);
   const [signInModal, setSignInModal] = useState(false);
@@ -20,7 +24,12 @@ function Login() {
 	const [signUpPassword, setSignUpPassword] = useState('');
 	const [signInUsername, setSignInUsername] = useState('');
 	const [signInPassword, setSignInPassword] = useState('');
+  const [userData, setUserData] = useState({});
 
+  const userInfos = userData.map((data, i) =>{
+    return <Hashtag key = {i} {...data} />
+  });
+  
   const showSignUpModal = () => {
 		setSignUpModal(!signUpModal);
 	};
@@ -41,6 +50,7 @@ function Login() {
         if(data.result)
         {
           dispatch(login({username : signUpUsername, token : data.token}));
+          setUserData({firstname : firstName, username : signUpUsername});
           setFirstName("");
           setSignUpUsername("");
           setSignUpPassword("");
@@ -54,7 +64,8 @@ function Login() {
       method : "POST",
       headers : {'Content-Type': 'application/json'},
       body : JSON.stringify({username : signInUsername, password : signInPassword})
-    }).then(data => {
+    }).then(response => response.json())
+    .then(data => {
       console.log(data.result)
       if(data.result)
       {
@@ -87,12 +98,16 @@ function Login() {
           <p className={styles.text}>Connect to Hackatweet</p>
           <input type="text" placeholder="Username" id="signInUsername" onChange={(e) => setSignInUsername(e.target.value)} value={signInUsername} />
           <input type="password" placeholder="Password" id="signInPassword" onChange={(e) => setSignInPassword(e.target.value)} value={signInPassword} />
-          <button id="connection" onClick={() => signInButtonClicked()}>Sign In</button>
+            <button id="connection" onClick={() => signInButtonClicked()}>Sign In</button>
       </div>
     </div>
   );
+  if(userToken)
+  {
+    router.push("/home");
+  }
 
-  console.log(signInUsername, signInPassword);
+  console.log(userToken);
   
   
   return (
