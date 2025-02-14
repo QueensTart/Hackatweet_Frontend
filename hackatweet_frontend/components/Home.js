@@ -53,15 +53,24 @@ function Home() {
         setTweets(tweets.filter(tweet => tweet.id !== id));
     };
 
+    const formatTweetContent = (content) => { // # en bleu
+        return content.split(" ").map((word, index) => {
+            // Si le mot commence par #, c'est un hashtag
+            if (word.startsWith("#")) {
+                return <span key={index} className={styles.hashtag}>{word} </span>;
+            }
+            return word + " ";
+        });
+    };
+
 
     return (
         <div className={styles.home}>
             <div className={styles.home_container}>
                 {logo}
-                <h2>Home</h2>
+                <h2 className={styles.title}>Home</h2>
 
-
-                 {/* Zone de saisie d'un nouveau tweet */}
+                {/* Zone de saisie d'un nouveau tweet */}
                 <div>
                     <input className={styles.champ}
                         type="text"
@@ -70,12 +79,12 @@ function Home() {
                         onChange={(e) => setTweetText(e.target.value)} 
                         maxLength={280}
                     />
-                    <div className={styles.character}>
-                     {tweetText.length} / 280
-                    </div>
                     <button className={styles.tweetbutton} onClick={handleTweet}>
                         Tweet
                     </button>
+                    <div className={styles.character}>
+                     {tweetText.length} / 280
+                    </div>
                 </div>
 
                 {/* Affichage des tweets */}
@@ -84,7 +93,20 @@ function Home() {
                         <div key={tweet.id} className={styles.tweet}>
                             <div className={styles.tweetHeader}>
                                 <strong>{tweet.author}</strong> {tweet.username} · {tweet.time}
+                            </div>
 
+                            {/* Contenu du tweet avec hashtags en bleu */}
+                            <p>{formatTweetContent(tweet.content)}</p>
+
+                            {/* Conteneur pour le like et la poubelle */}
+                            <div className={styles.tweetActions}>
+                                {/* Liker le tweet */}
+                                <span className={styles.likeButton} 
+                                    onClick={() => handleLike(tweet.id)} 
+                                    style={{ cursor: "pointer" }}
+                                >
+                                    ❤️ {tweet.likes}
+                                </span>
 
                                 {/* Affiche la poubelle uniquement si c'est notre tweet */}
                                 {tweet.isMine && (
@@ -93,17 +115,6 @@ function Home() {
                                     />
                                 )}
                             </div>
-
-                            {/* Contenu du tweet */}
-                            <p>{tweet.content}</p>
-
-                             {/* liker le tweet */}
-                            <span className={styles.likeButton} 
-                                onClick={() => handleLike(tweet.id)} 
-                                style={{ cursor: "pointer" }}
-                            >
-                                ❤️ {tweet.likes}
-                            </span>
                         </div>
                     ))}
                 </div>

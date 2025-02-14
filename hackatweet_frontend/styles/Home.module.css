@@ -2,31 +2,41 @@
     display: flex;
     justify-content: center;
     background-color: #15202b;
-    color: white;
+    color: rgb(243, 235, 235);
     height: 100vh;
     padding: 20px;
     position: relative;
 }
 
+.title {
+   margin-left: -85%;
+   margin-top: -10%;
+}
+
 .home_container {
-    width: 350px;
+    width: 700px;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    margin-right: 20%;
+    align-items: center;
+    border-left: 1px solid grey;
+    border-right: 1px solid grey;
+    padding: 20px;
+    margin: 0 auto;
+    min-height: 100vh;
 }
-
 
 .champ {
-    width: 390%;
+    width: 100%;
     padding: 10px;
     border: none;
-    border-radius: 20px;
-    background-color: rgb(232, 231, 231);
-    color: black;
-    text-indent: 10px;
-    margin-bottom: 10px;
+    border-bottom: 1px solid #38444d;
+    background-color: transparent;
+    color: white;
+    text-indent: 0;
+    outline: none;
+    font-size: 16px;
 }
+
 
 
 .tweetbutton {
@@ -38,13 +48,15 @@
     font-weight: bold;
     height: 30px;
     width: 100px;
-    margin-left: 330%;
+    margin-left: 80%;
 }
 
 
 .tweets {
-    margin-top: 20px;
-    width: 185%;
+    margin-top: 60px;
+    width: 100%;
+    border-top: 1px solid #38444d;
+    padding-top: 10px;
 }
 
 
@@ -57,6 +69,7 @@
 .hashtag {
     color: #1da1f2;
     font-weight: bold;
+    text-decoration: none;
 }
 
 .poubelle {
@@ -72,14 +85,15 @@
 }
 
 .character {
-    display: flex;
-    margin-left: 250%;
+    margin-left: 60%;
     width: 100px;
+    margin-top: -25px;
 }
 
 .logo {
     height: 80px;
     width: 80px;
-    margin-left: -110%;
+    margin-left: -200%;
+    margin-top: -5%;
     transform: scaleX(-1);
 }
