@@ -26,9 +26,9 @@ function Login() {
 	const [signInPassword, setSignInPassword] = useState('');
   const [userData, setUserData] = useState({});
 
-  const userInfos = userData.map((data, i) =>{
-    return <Hashtag key = {i} {...data} />
-  });
+  // const userInfos = userData.map((data, i) =>{
+  //   return <Hashtag key = {i} {...data} />
+  // });
   
   const showSignUpModal = () => {
 		setSignUpModal(!signUpModal);
@@ -49,8 +49,8 @@ function Login() {
       .then(data => {
         if(data.result)
         {
-          dispatch(login({username : signUpUsername, token : data.token}));
-          setUserData({firstname : firstName, username : signUpUsername});
+          dispatch(login({username : data.userInfo.username, token : data.token}));
+          setUserData({firstname : data.userInfo.firstname, username : data.userInfo.username});
           setFirstName("");
           setSignUpUsername("");
           setSignUpPassword("");
@@ -69,7 +69,7 @@ function Login() {
       console.log(data.result)
       if(data.result)
       {
-        dispatch(login({username : signInUsername, token : data.token}));
+        dispatch(login({username : data.userInfo.username, token : data.token}));
         setSignInUsername("");
         setSignInPassword("");
         showSignInModal();
