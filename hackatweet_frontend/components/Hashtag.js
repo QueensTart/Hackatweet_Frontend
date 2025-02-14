@@ -13,6 +13,10 @@ function Hashtag() {
     const user = useSelector((state) => state.user.value);
     
     const [searchedHashtag, setSearchedHashtag] = useState("");
+    const [tweetContent, setTweetContent] = useState("");
+    const [tweetList, setTweetList] = useState([]);
+
+    let tweet = <Tweet firstname={user.firstname} username={user.username} content={tweetContent} />
     
     let logo = (<img className={styles.logo} src="hackatweet_logo.png" alt = "logo"/>);
     let picture = (<img className={styles.profilePicture} src="profilepicture.png" alt = "profile picture"/>);
@@ -43,19 +47,20 @@ function Hashtag() {
         dispatch(logout());
         router.push("/");
     };
+    const searchButtonClicked = () =>{
+        setTweetList(tweet)
+    }
     
     return (
     <div className={styles.main}>
-        <button className = {styles.homeButton} onClick={() => homeButtonClicked()}>
-            {logo}
-        </button>
         <div className={styles.homeContainer}>
+            <button className = {styles.homeButton} onClick={() => homeButtonClicked()}>
+                {logo}
+            </button>
             <div className={styles.user}>
                 {picture}
-                <div className={styles.userInfos}>
-                    <p>{user.firstname}</p>
-                    <p className={styles.userName}>@{user.username}</p>
-                </div>
+                <p className={styles.firstName}>{user.firstname}</p>
+                <p className={styles.userName}>@{user.username}</p>
             </div>
             <button className={styles.logoutButton} onClick={() => logoutButtonClicked()}>
                 Log out
@@ -63,10 +68,11 @@ function Hashtag() {
         </div>
         <div className={styles.tweetContainer}>
             <h2 className={styles.hashtagTitle}>Hashtag</h2>
-            <input type = "text" placeholder="#hackatweet" className={styles.searchbar} onChange={(e) => setSearchedHashtag(e.target.value)} value={searchedHashtag}/>
-            {/* <div className={styles.tweetList}>
-                <Tweet/>
-            </div> */}
+            <input type = "text" placeholder="#hackatweet" className={styles.searchbar} onChange={(e) => setTweetContent(e.target.value)} value={tweetContent}/>
+            <button onClick={() => searchButtonClicked()}>Find Tweet</button>
+            <div className={styles.tweetList}>
+                {tweetList}
+            </div>
         </div>
         <div className={styles.trendContainer}>
             <h2>Trends</h2>

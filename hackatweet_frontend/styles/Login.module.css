@@ -51,6 +51,17 @@
   	font-weight: 200;
 }
 
+.input
+{
+	width : 300px;
+	height : 40px;
+	padding : 5px;
+	border-radius: 5px;
+	color: white;
+	border : 1px solid #49525e;
+	margin : 10px
+}
+
 .closeButton
 {
 	width : 20px;
@@ -65,6 +76,7 @@
 	justify-content: center;
 	align-items: center;
 	background-color: #141c27;
+	padding : 10px;
 }
 
 .signInSection {
@@ -73,4 +85,10 @@
 	justify-content: center;
 	align-items: center;
 	background-color: #141c27;
+	padding : 10px;
+}
+
+.modals
+{
+	background-color: #141c27;	
 }

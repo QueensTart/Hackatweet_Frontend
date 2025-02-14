@@ -24,11 +24,6 @@ function Login() {
 	const [signUpPassword, setSignUpPassword] = useState('');
 	const [signInUsername, setSignInUsername] = useState('');
 	const [signInPassword, setSignInPassword] = useState('');
-  //const [userData, setUserData] = useState([]);
-
-  // const userInfos = userData.map((data, i) =>{
-  //   return <Hashtag key = {i} firstname = {data.firstname} username = {data.username} />
-  // });
   
   const showSignUpModal = () => {
 		setSignUpModal(!signUpModal);
@@ -50,7 +45,6 @@ function Login() {
       if(data.result)
       {
         dispatch(login({username : data.userInfo.username, firstname : data.userInfo.firstname, token : data.userInfo.token}));
-        //setUserData([{firstname : data.userInfo.firstname, username : data.userInfo.username}]);
         showSignUpModal();
       }
     });
@@ -67,7 +61,6 @@ function Login() {
       if(data.result)
       {
         dispatch(login({username : data.userInfo.username, firstname : data.userInfo.firstname, token : data.token}));
-        //setUserData([{firstname : data.userInfo.firstname, username : data.userInfo.username}]);
         showSignInModal();
       }
     });
@@ -79,9 +72,9 @@ function Login() {
 		  <div className={styles.signUpSection}>
         {logo}
 				<p className={styles.text}>Create your Hackatweet account</p>
-        <input type="text" placeholder="Firstname" id="signUpFirstname" onChange={(e) => setFirstName(e.target.value)} value={firstName}/>
-				<input type="text" placeholder="Username" id="signUpUsername" onChange={(e) => setSignUpUsername(e.target.value)} value={signUpUsername}/>
-				<input type="password" placeholder="Password" id="signUpPassword" onChange={(e) => setSignUpPassword(e.target.value)} value={signUpPassword}/>
+        <input type="text" placeholder="Firstname" id="signUpFirstname" className={styles.input} onChange={(e) => setFirstName(e.target.value)} value={firstName}/>
+				<input type="text" placeholder="Username" id="signUpUsername" className={styles.input} onChange={(e) => setSignUpUsername(e.target.value)} value={signUpUsername}/>
+				<input type="password" placeholder="Password" id="signUpPassword" className={styles.input} onChange={(e) => setSignUpPassword(e.target.value)} value={signUpPassword}/>
 				<button id="register" onClick={() => signUpButtonClicked()}>Sign Up</button>
 		  </div>
 		</div>
@@ -92,8 +85,8 @@ function Login() {
       <button className={styles.closeButton} onClick={() => showSignInModal()}>X</button>
       <div className={styles.signInSection}>
           <p className={styles.text}>Connect to Hackatweet</p>
-          <input type="text" placeholder="Username" id="signInUsername" onChange={(e) => setSignInUsername(e.target.value)} value={signInUsername} />
-          <input type="password" placeholder="Password" id="signInPassword" onChange={(e) => setSignInPassword(e.target.value)} value={signInPassword} />
+          <input type="text" placeholder="Username" id="signInUsername" className={styles.input} onChange={(e) => setSignInUsername(e.target.value)} value={signInUsername} />
+          <input type="password" placeholder="Password" id="signInPassword" className={styles.input} onChange={(e) => setSignInPassword(e.target.value)} value={signInPassword} />
             <button id="connection" onClick={() => signInButtonClicked()}>Sign In</button>
       </div>
     </div>
@@ -121,13 +114,13 @@ function Login() {
               <button onClick={() => showSignUpModal()}>Sign Up</button>
               <p className={styles.title}>Already have an account?</p>
               <button onClick={() => showSignInModal()}>Sign In</button>
-              {signUpModal && <div id="react-modals">
-                <Modal getContainer="#react-modals" className={styles.modal} visible={signUpModal} closable={false} footer={null}>
+              {signUpModal && <div className={styles.modals}>
+                <Modal bodyStyle={{backgroundColor : "#141c27"}} open={signUpModal} closable={false} footer={null}>
                   {signUpModalContent}
                 </Modal>
               </div>}
-              {signInModal && <div id="react-modals">
-                <Modal getContainer="#react-modals" className={styles.modal} visible={signInModal} closable={false} footer={null}>
+              {signInModal && <div className={styles.modals}>
+                <Modal bodyStyle={{backgroundColor : "#141c27"}} open={signInModal} closable={false} footer={null}>
                   {signInModalContent}
                 </Modal>
               </div>}

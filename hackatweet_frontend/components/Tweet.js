@@ -1,19 +1,23 @@
-import { useState } from "react";
 import { useSelector } from "react-redux";
 
-import styles from "../styles/Hashtag.module.css";
+import styles from "../styles/Tweet.module.css";
 
-function Tweet() {
-    const user = useSelector((state) => state.user.value);
+function Tweet(props) {
+    //const user = useSelector((state) => state.user.value);
 
     let picture = (<img className={styles.profilePicture} src="profilepicture.png" alt = "profile picture"/>);
 
     return (
         <div className={styles.main}>
-            {picture}
-            <div>
-                <h3>{user.firstname}</h3>
-                <p className={styles.userName}>@{user.username} . </p>
+            <div className={styles.userInfo}>
+                {picture}
+                <div className = {styles.header}>
+                    <h3>{props.firstname}</h3>
+                    <p className={styles.userName}>@{props.username} . </p>
+                </div>
+            </div>
+            <div className={styles.content}>
+                <p>{props.content}</p>
             </div>
 
         </div>
