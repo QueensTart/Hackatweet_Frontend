@@ -1,0 +1,18 @@
+.main
+{
+    width : 200px;
+    height : 150px;
+    background-color: #1a222c;
+    border : 1px solid red;
+}
+
+.profilePicture
+{
+    width: 80px;
+    height : 80px; 
+}
+
+.userName
+{
+    color: #49525e;
+}

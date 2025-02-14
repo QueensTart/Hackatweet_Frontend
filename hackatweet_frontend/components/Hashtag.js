@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import { logout } from "../reducers/user"
 
 import styles from "../styles/Hashtag.module.css";
+import Tweet from "./Tweet";
 
 function Hashtag() {
     const router = useRouter();
@@ -63,6 +64,9 @@ function Hashtag() {
         <div className={styles.tweetContainer}>
             <h2 className={styles.hashtagTitle}>Hashtag</h2>
             <input type = "text" placeholder="#hackatweet" className={styles.searchbar} onChange={(e) => setSearchedHashtag(e.target.value)} value={searchedHashtag}/>
+            {/* <div className={styles.tweetList}>
+                <Tweet/>
+            </div> */}
         </div>
         <div className={styles.trendContainer}>
             <h2>Trends</h2>
