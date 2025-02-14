@@ -18,7 +18,7 @@
 
 
 .champ {
-    width: 185%;
+    width: 390%;
     padding: 10px;
     border: none;
     border-radius: 20px;
@@ -38,7 +38,7 @@
     font-weight: bold;
     height: 30px;
     width: 100px;
-    margin-left: 150%;
+    margin-left: 330%;
 }
 
 
@@ -69,4 +69,17 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.character {
+    display: flex;
+    margin-left: 250%;
+    width: 100px;
+}
+
+.logo {
+    height: 80px;
+    width: 80px;
+    margin-left: -110%;
+    transform: scaleX(-1);
 }

@@ -1,14 +1,19 @@
 import React, { useState } from 'react';
 import styles from '../styles/Home.module.css';
 import { FaTrash } from "react-icons/fa";
+import { useSelector } from "react-redux";
 
 function Home() {
     const [tweetText, setTweetText] = useState(""); // Stocker le texte du tweet en cours
+
+    let logo = (<img className={styles.logo} src="hackatweet_logo.png" alt = "logo"/>);
 
     const [tweets, setTweets] = useState([
         { id: 1, author: "Antoine", username: "@AntoineLeProf", time: "5 hours", content: "Welcome to #hackatweet guys 😎", likes: 0, isMine: false },
         { id: 2, author: "Antoine", username: "@AntoineLeProf", time: "5 hours", content: "First! #hackatweet #first", likes: 1, isMine: false }
     ]);
+
+    const user = useSelector((state) => state.user.value);
 
     /* Ajouter un nouveau tweet */
     const handleTweet = () => {
@@ -17,8 +22,8 @@ function Home() {
 
         const newTweet = {
             id: tweets.length + 1, 
-            firstname: "You",
-            username: "@You",
+            firstname: user.firstname,
+            username: user.username,
             time: "12h00",
             content: tweetText,
             likes: 0,
@@ -52,6 +57,7 @@ function Home() {
     return (
         <div className={styles.home}>
             <div className={styles.home_container}>
+                {logo}
                 <h2>Home</h2>
 
 
@@ -62,7 +68,11 @@ function Home() {
                         placeholder="What's up?"  
                         value={tweetText} 
                         onChange={(e) => setTweetText(e.target.value)} 
+                        maxLength={280}
                     />
+                    <div className={styles.character}>
+                     {tweetText.length} / 280
+                    </div>
                     <button className={styles.tweetbutton} onClick={handleTweet}>
                         Tweet
                     </button>
